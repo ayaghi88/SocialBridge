@@ -13,28 +13,6 @@ export const LoginView = ({ onLogin }: LoginViewProps) => {
   const [org, setOrg] = useState("Amber's Healthcare");
   const [error, setError] = useState('');
 
-  // Sample quick accounts to demonstrate multi-user separation
-  const PRESET_ACCOUNTS = [
-    {
-      email: 'ambersamanthayaghi@gmail.com',
-      name: 'Amber Samantha Yaghi',
-      role: 'Manager' as const,
-      organization: "Amber's Healthcare",
-    },
-    {
-      email: 'jdoe@ambershealthcare.com',
-      name: 'John Doe',
-      role: 'Administrator' as const,
-      organization: "Amber's Healthcare",
-    },
-    {
-      email: 'asmith@ambershealthcare.com',
-      name: 'Alice Smith',
-      role: 'Operator' as const,
-      organization: "Amber's Healthcare",
-    },
-  ];
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
@@ -51,15 +29,6 @@ export const LoginView = ({ onLogin }: LoginViewProps) => {
       name: derivedName,
       role: role,
       organization: org.trim() || 'SocialBridge Entity',
-    });
-  };
-
-  const handlePresetSelect = (acc: typeof PRESET_ACCOUNTS[0]) => {
-    onLogin({
-      email: acc.email,
-      name: acc.name,
-      role: acc.role,
-      organization: acc.organization,
     });
   };
 
@@ -84,7 +53,7 @@ export const LoginView = ({ onLogin }: LoginViewProps) => {
           <div className="border-b border-line/15 pb-4">
             <h2 className="text-2xl font-bold tracking-tighter uppercase font-sans">Enterprise Portal</h2>
             <p className="text-xs font-serif italic opacity-60 mt-1">
-              Sign in to manage isolated social profiles & temporary phone assets securely.
+              Sign in with your work email to access your isolated social profiles and phone assets securely.
             </p>
           </div>
 
@@ -151,41 +120,6 @@ export const LoginView = ({ onLogin }: LoginViewProps) => {
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
-
-          {/* Quick Access Divider */}
-          <div className="relative my-2 flex items-center">
-            <div className="flex-grow border-t border-line/10"></div>
-            <span className="flex-shrink mx-3 text-[10px] font-mono opacity-50 uppercase tracking-widest">
-              Presets & Profiles
-            </span>
-            <div className="flex-grow border-t border-line/10"></div>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <div className="text-[10px] font-mono opacity-50 tracking-wider text-center mb-1">
-              SELECT PRESET USER PORTAL (ISOLATED SIMS)
-            </div>
-            {PRESET_ACCOUNTS.map((acc, idx) => (
-              <button
-                key={idx}
-                onClick={() => handlePresetSelect(acc)}
-                className="w-full text-left p-3 border border-line/15 rounded bg-ink/5 hover:bg-ink hover:text-bg transition-all flex justify-between items-center group cursor-pointer"
-              >
-                <div>
-                  <div className="text-xs font-bold leading-none mb-1">{acc.name}</div>
-                  <div className="text-[10px] font-mono opacity-50 group-hover:opacity-80 truncate max-w-[240px]">
-                    {acc.email}
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[9px] font-mono tracking-widest px-1.5 py-0.5 border rounded border-current uppercase">
-                    {acc.role}
-                  </span>
-                  <UserCheck className="w-4 h-4 opacity-50 group-hover:opacity-100" />
-                </div>
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Security / Separation Info Card */}
