@@ -41,3 +41,11 @@ export interface AuditLogEntry {
   action: string;
   details: string;
 }
+
+export interface UserSession {
+  email: string;
+  name: string;
+  role: 'Administrator' | 'Operator' | 'Manager';
+  organization: string;
+}
+
